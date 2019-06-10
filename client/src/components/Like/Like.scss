@@ -1,0 +1,62 @@
+.like {
+
+    $this: &;
+
+    display: flex;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover{
+
+        #{$this}__heart{
+            background-color: red;
+
+            &::before,
+            &::after{
+                background-color: red;
+            }
+
+        }
+
+    }
+
+    &__heart {
+        position: relative;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background-color: #FFB2B2;
+        transform: rotate(-45deg);
+        margin-right: 12px;
+        transition: 0.3s background-color;
+
+        &::before,
+        &::after{
+            position: absolute;
+            content: "";
+            width: 16px;
+            height: 16px;
+            background-color: #FFB2B2;
+            border-radius: 50%;
+            transition: 0.3s background-color;
+        }
+
+        &::before {
+            top: -8px;
+            left: 0;
+        }
+
+        &::after {
+            top: 0;
+            right: -8px;
+        }
+
+    }
+
+    &__counter{
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+}

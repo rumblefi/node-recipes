@@ -1,0 +1,29 @@
+.header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background-color: #007bff;
+    color: #fff;
+
+    a{
+        color: inherit;
+        text-decoration: none;
+
+        &:hover{
+            color: #fff;
+        }
+
+    }
+
+    &__container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+}
