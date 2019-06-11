@@ -1,4 +1,4 @@
-.header{
+.header {
     position: fixed;
     left: 0;
     right: 0;
@@ -10,20 +10,41 @@
     background-color: #007bff;
     color: #fff;
 
-    a{
+    a {
         color: inherit;
         text-decoration: none;
 
-        &:hover{
+        &:hover {
             color: #fff;
         }
 
     }
 
-    &__container{
+    &__container {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+
+    &-auth-links {
+        display: flex;
+        align-items: center;
+
+        &__item {
+            font-size: 18px;
+            margin-right: 25px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+        }
+        
     }
 
 }

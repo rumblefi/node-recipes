@@ -11,7 +11,6 @@ const Home = () => (
                 {({data,loading,error}) => {
                     if(loading) return <p>loading...</p>
                     if(error) return <p>Error</p>
-                    console.log('getAllRecipesData', data.getAllRecipes)
                     return <div>fuck</div>
                 }}
             </Query>

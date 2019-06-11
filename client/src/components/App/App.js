@@ -7,28 +7,23 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 import RecipePage from '../RecipePage/RecipePage'
 import SignIn from '../SignIn/SignIn'
 import SignUp from '../SignUp/SignUp'
-import ApolloClient from 'apollo-boost'
-import {ApolloProvider} from 'react-apollo'
+import withSession from '../../HOC/withSession/withSession'
+import Cabinet from '../Cabinet/Cabinet'
 
-const client = new ApolloClient({
-    uri: 'http://localhost:4444/graphql'
-})
-
-const App = () => {
+const App = ({refetch,session}) => {
     return(
-        <ApolloProvider client={client} >
-            <Router>
-                <Header />
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route path="/recipe" component={RecipePage} />
-                    <Route path="/signin" component={SignIn} />
-                    <Route path="/signup" component={SignUp} />
-                    <Redirect to="/" />
-                </Switch>
-            </Router>
-        </ApolloProvider>
+        <Router>
+            <Header session={session} />
+            <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/recipe" component={RecipePage} />
+                <Route path="/signin" render={() => <SignIn refetch={refetch}/>} />
+                <Route path="/signup" render={() => <SignUp refetch={refetch}/>} />
+                <Route path="/cabinet" component={Cabinet} />
+                <Redirect to="/" />
+            </Switch>
+        </Router>
     )   
 }
 
-export default App
+export default withSession(App)

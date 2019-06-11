@@ -6,9 +6,6 @@ const Menu = () => (
         <li className="menu__item">
             <a href="" className="menu__link">Add recipe</a>
         </li>
-        <li className="menu__item">
-            <a href="" className="menu__link">Profile</a>
-        </li>
     </ul>
 )
 

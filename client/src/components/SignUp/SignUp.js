@@ -3,6 +3,7 @@ import './SignUp.scss'
 import {Mutation} from 'react-apollo'
 import {SIGNUP_USER} from '../../queries/index'
 import Error from '../Error/Error'
+import {withRouter} from 'react-router-dom'
 
 const initialState = {
     username: '',
@@ -34,8 +35,10 @@ class SignUp extends React.Component{
     handleSubmit = (event,signupUser) => {
         event.preventDefault()
         signupUser()
-            .then(data => {
+            .then( async (data) => {
+                await this.props.refetch()
                 this.clearState()
+                this.props.history.push('/signin')
             })
             .catch(error => console.error(error))
     }
@@ -71,4 +74,4 @@ class SignUp extends React.Component{
 
 }
 
-export default SignUp
+export default withRouter(SignUp)

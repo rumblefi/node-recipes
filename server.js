@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const {typeDefs} = require('./schema')
 const {resolvers} = require('./resolvers')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
 
 //bring in GraphQl-Express middleware
 const {graphiqlExpress,graphqlExpress} = require('apollo-server-express')
@@ -33,6 +34,21 @@ app.use(cors({
     credentials: true
 }))
 
+
+// set up JWT authentication middleware
+app.use(async (req,res,next) => {
+    const token = req.headers['authorization']   
+    if(token !== "null") {
+        try {
+            const currentUser = await jwt.verify(token,process.env.SECRET)
+            req.currentUser = currentUser
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    next()
+})
+
 //create graphiql application
 app.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql'
@@ -41,13 +57,14 @@ app.use('/graphiql', graphiqlExpress({
 //connect schemas with GraphQl
 app.use('/graphql', 
     bodyParser.json(),
-    graphqlExpress({
+    graphqlExpress( ({currentUser}) => ({
         schema,
         context: {
             Recipe,
-            User
+            User,
+            currentUser
         }
-    })
+    }))
 )
 
 const PORT = process.env.PORT || 4444
