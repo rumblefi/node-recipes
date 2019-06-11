@@ -49,11 +49,16 @@ img{
     border-radius: 4px;
     background-color: #007bff;
     cursor: pointer;
-    transition: 0.3s background-color;
+    transition: 0.3s background-color, 0.3s opacity;
 
     &:hover{
         color: #fff;
         text-decoration: none;
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        pointer-events: none;
     }
 
     &--1{

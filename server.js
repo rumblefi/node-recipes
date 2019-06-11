@@ -6,6 +6,7 @@ const User = require('./models/User')
 const bodyParser = require('body-parser')
 const {typeDefs} = require('./schema')
 const {resolvers} = require('./resolvers')
+const cors = require('cors')
 
 //bring in GraphQl-Express middleware
 const {graphiqlExpress,graphqlExpress} = require('apollo-server-express')
@@ -27,19 +28,27 @@ mongoose
 
 const app = express()
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
+
 //create graphiql application
 app.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql'
 }))
 
 //connect schemas with GraphQl
-app.use('/graphql', graphqlExpress({
-    schema,
-    context: {
-        Recipe,
-        User
-    }
-}))
+app.use('/graphql', 
+    bodyParser.json(),
+    graphqlExpress({
+        schema,
+        context: {
+            Recipe,
+            User
+        }
+    })
+)
 
 const PORT = process.env.PORT || 4444
 

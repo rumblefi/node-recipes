@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
@@ -24,6 +25,18 @@ const UserSchema = new Schema({
         type: [Schema.Types.ObjectId],
         ref: 'Recipe'
     }
+})
+
+UserSchema.pre('save', function(next) {
+    if(!this.isModified('password')) return next()
+    bcrypt.genSalt(10, (error,salt) => {
+        if(error) return next(error)
+        bcrypt.hash(this.password,salt, (error,hash) => {
+            if(error) return next(error)
+            this.password = hash
+            next()
+        })
+    })
 })
 
 module.exports = mongoose.model('User', UserSchema)

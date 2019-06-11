@@ -4,8 +4,8 @@ import {NavLink} from 'react-router-dom'
 
 const HeaderAuth = () => (
     <div className="header-auth" >
-        <NavLink to="/sign-in" className="header-auth__item" >Sign In</NavLink>
-        <NavLink to="/sign-up" className="header-auth__item" >Sign Up</NavLink>
+        <NavLink to="/signin" className="header-auth__item" >Sign In</NavLink>
+        <NavLink to="/signup" className="header-auth__item" >Sign Up</NavLink>
     </div>
 )
 
