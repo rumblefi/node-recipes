@@ -1,8 +1,28 @@
 import React from 'react'
 import './SignOut.scss'
+import {ApolloConsumer} from 'react-apollo'
+import {withRouter} from 'react-router-dom'
 
-const SignOut = () => (
-    <a href="" className="sign-out">Sign Out</a>
-)
+class SignOut extends React.Component{
 
-export default SignOut
+    handleSignOut = (client) => {
+        localStorage.removeItem('token')
+        client.resetStore()
+        this.props.history.push('/')
+    }
+
+    render() {
+
+        return(
+            <ApolloConsumer>
+                {(client) => {
+                    return <div className="sign-out" onClick={() => this.handleSignOut(client)} >Sign Out</div>
+                }}
+            </ApolloConsumer>
+        )
+
+    }
+
+}
+
+export default withRouter(SignOut)

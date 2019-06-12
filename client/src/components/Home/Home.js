@@ -1,7 +1,8 @@
 import React from 'react'
-import RecipePreview from '../RecipePreview/RecipePreview'
 import {GET_ALL_RECIPES} from '../../queries/index'
 import {Query} from 'react-apollo'
+import Error from '../Error/Error'
+import Recipes from '../Recipes/Recipes'
 
 const Home = () => (
     <main className="home" >
@@ -10,15 +11,11 @@ const Home = () => (
             <Query query={GET_ALL_RECIPES} >
                 {({data,loading,error}) => {
                     if(loading) return <p>loading...</p>
-                    if(error) return <p>Error</p>
-                    return <div>fuck</div>
+                    if(error) return <Error error={error.message} />
+                    if(data.getAllRecipes.length > 0) return <Recipes recipes={data} /> 
+                    return <span>No recipes</span>
                 }}
             </Query>
-            <div className="recipes" >
-                <RecipePreview />
-                <RecipePreview />
-                <RecipePreview />
-            </div>
         </div>  
     </main>
 )

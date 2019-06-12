@@ -16,7 +16,7 @@ const App = ({refetch,session}) => {
             <Header session={session} />
             <Switch>
                 <Route path="/" exact component={Home} />
-                <Route path="/recipe" component={RecipePage} />
+                <Route path="/recipe/:_id" component={RecipePage} />
                 <Route path="/signin" render={() => <SignIn refetch={refetch}/>} />
                 <Route path="/signup" render={() => <SignUp refetch={refetch}/>} />
                 <Route path="/cabinet" component={Cabinet} />

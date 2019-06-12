@@ -20,6 +20,9 @@ exports.resolvers = {
                     path: 'favorites',
                     model: 'Recipe'
                 })
+        },
+        getRecipe: async (root,{_id}, {Recipe}) => {
+            return await Recipe.findOne({_id})
         }
     },
     Mutation: {

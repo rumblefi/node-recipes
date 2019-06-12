@@ -23,6 +23,14 @@ export const GET_CURRENT_USER = gql`
     }
 `
 
+export const GET_RECIPE = gql`
+    query($_id: ID!) {
+        getRecipe(_id: $_id) {
+            name
+        }
+    }
+`
+
 export const SIGNUP_USER = gql`
     mutation($username: String!, $email: String!, $password: String!) {
         signupUser(username:$username,email: $email, password: $password){

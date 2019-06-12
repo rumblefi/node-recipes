@@ -27,6 +27,7 @@ exports.typeDefs = `
     type Query {
         getAllRecipes: [Recipe]
         getCurrentUser: User
+        getRecipe(_id: ID!): Recipe
     }
 
     type Mutation {
