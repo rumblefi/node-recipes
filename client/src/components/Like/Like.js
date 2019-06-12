@@ -1,10 +1,10 @@
 import React from 'react'
 import './Like.scss'
 
-const Like = () => (
+const Like = ({count}) => (
     <div className="like" >
         <div className="like__heart"></div>    
-        <div className="like__counter">10</div>
+        <div className="like__counter">{count}</div>
     </div>
 )
 
