@@ -31,9 +31,9 @@ exports.resolvers = {
     },
     Mutation: {
         addRecipe: async (root,args, {Recipe}) => {
-            const {name,description, category, instructions, username} = args
+            const {name,description, category, ingredients, instructions, username} = args
             return await new Recipe({
-                name,description, category, instructions, username
+                name,description, category, ingredients, instructions, username
             }).save()
         },
         signupUser: async (root,{username,email,password},{User}) => {

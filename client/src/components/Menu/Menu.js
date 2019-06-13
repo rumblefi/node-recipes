@@ -1,10 +1,11 @@
 import React from 'react'
 import './Menu.scss'
+import {NavLink} from 'react-router-dom'
 
 const Menu = () => (
     <ul className="menu" >
         <li className="menu__item">
-            <a href="" className="menu__link">Add recipe</a>
+            <NavLink to="/add-recipe" className="menu__link">Add Recipe</NavLink>
         </li>
     </ul>
 )
