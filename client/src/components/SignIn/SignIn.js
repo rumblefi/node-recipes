@@ -52,13 +52,13 @@ class SignIn extends React.Component{
                     <Mutation mutation={SIGNIN_USER} variables={{username,password}} >
 
                         {(signinUser,{data,loading,error}) => {
+                            if(error) return <Error error={error.message} />
                             return(
                                 <form className="form" onSubmit={event => this.handleSubmit(event,signinUser)} >
                                     <h1 className="h1">Sign In</h1>
                                     <input type="text" className="form__field" placeholder="Username" name="username" onChange={this.handleChange} value={username} />
                                     <input type="password" className="form__field" placeholder="Password" name="password" onChange={this.handleChange} value={password} />
                                     <button className="button button--1 form__submit" disabled={loading || this.validateForm()} >Sign In</button>
-                                    {error && <Error error={error.message} /> }
                                 </form>
                             )
                         }}

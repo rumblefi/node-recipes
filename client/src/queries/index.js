@@ -53,3 +53,12 @@ export const SIGNIN_USER = gql`
         }
     }
 `
+
+export const ADD_RECIPE = gql`
+    mutation($name: String!, $imageURL: String!, $description: String!, $category: String!, $ingredients: String!, $instructions: String!, $username: String) {
+        addRecipe(name: $name, imageURL: $imageURL, description: $description, category: $category, ingredients: $ingredients, instructions: $instructions, username: $username){
+            _id
+            name
+        }
+    }
+`
