@@ -1,10 +1,11 @@
 import React from 'react'
 import './RecipePage.scss'
 import Like from '../Like/Like'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import {Query} from 'react-apollo'
 import {GET_RECIPE} from '../../queries/index'
 import Error from '../Error/Error'
+import Loader from '../Loader/Loader'
 
 const formatDate = (dateStr) => {
     const date = new Date(dateStr)
@@ -41,7 +42,7 @@ const RecipePageLayout = ({recipe}) => (
             </div>
         </div>
         <div className="recipe-page__back-wrapper">
-            <a href="" className="button button--1 recipe-page__back">Back</a>
+            <Link to="/" exact className="button button--1 recipe-page__back">Back</Link>
         </div>
     </div>
 )
@@ -55,7 +56,7 @@ const RecipePage = ({match}) => {
             <div className="container" >
                 <Query query={GET_RECIPE} variables={{_id}} >
                     {({data,loading,error}) => {
-                        if(loading) return <div>Loading...</div>
+                        if(loading) return <Loader />
                         if(error) return <Error error={error.message} />
                         return <RecipePageLayout recipe={data.getRecipe} />
                     }}

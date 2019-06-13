@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
+
 const createToken = (user,secret,expiresIn) => {
     const {username,email} = user
     return jwt.sign({username,email}, secret, {expiresIn})
@@ -22,7 +23,10 @@ exports.resolvers = {
                 })
         },
         getRecipe: async (root,{_id}, {Recipe}) => {
-            return await Recipe.findOne({_id})
+            if (!_id.match(/^[0-9a-fA-F]{24}$/)) throw new Error('Recipe not found')
+            const recipe = await Recipe.findOne({_id})
+            if(!recipe) throw new Error('Recipe not found')
+            return recipe
         }
     },
     Mutation: {
