@@ -10,7 +10,7 @@ const createToken = (user,secret,expiresIn) => {
 exports.resolvers = {
     Query: {
         getAllRecipes: async (root, args, {Recipe}) => {
-            return await Recipe.find()
+            return await Recipe.find().sort({createdDate: 'desc'})
         },
         getCurrentUser: async(root,args,{currentUser,User}) => {
             if(!currentUser) {

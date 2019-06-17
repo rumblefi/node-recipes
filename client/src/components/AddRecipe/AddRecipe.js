@@ -1,7 +1,7 @@
 import React from 'react'
 import './AddRecipe.scss'
 import {Mutation} from 'react-apollo'
-import {ADD_RECIPE} from '../../queries/index'
+import {ADD_RECIPE, GET_ALL_RECIPES} from '../../queries/index'
 import Error from '../Error/Error'
 import {withRouter} from 'react-router-dom'
 
@@ -11,12 +11,23 @@ const initialState = {
     description: '',
     ingredients: '',
     instructions: '',
-    category: 'Breakfast'
+    category: 'Breakfast',
+    username: ''
 }
 
 class AddRecipe extends React.Component{
 
     state = initialState
+
+    componentDidMount() {
+        this.setState({
+            username: this.props.session.getCurrentUser.username
+        })
+    }
+
+    clearState = () => {
+        this.setState({...initialState})
+    }
 
     handleChange = (event) => {
         const {name,value} = event.target
@@ -29,21 +40,32 @@ class AddRecipe extends React.Component{
         event.preventDefault()
         const addRecipeData = await addRecipe()
         try {
+            this.clearState()
             this.props.history.push('/')
         } catch (error) {
             console.error(error)
         }
     }
 
+    updateCache = (cache,{data: {addRecipe}}) => {
+        const {getAllRecipes} = cache.readQuery({query: GET_ALL_RECIPES})
+        cache.writeQuery({
+            query: GET_ALL_RECIPES,
+            data: {
+                getAllRecipes: [addRecipe,...getAllRecipes]
+            }
+        })
+    }
+
     render() {
 
-        const {name,imageURL,description,ingredients,instructions,category} = this.state
+        const {name,imageURL,description,ingredients,instructions,category,username} = this.state
 
         return(
             <div className="add-recipe" >
                 <div className="container add-recipe__container" >
 
-                    <Mutation mutation={ADD_RECIPE} variables={{name,imageURL,description,ingredients,instructions,category}} >
+                    <Mutation mutation={ADD_RECIPE} variables={{name,imageURL,description,ingredients,instructions,category,username}} update={this.updateCache} >
 
                         {(addRecipe,{data,loading,error}) => {
                             if(error) return <Error error={error.message} />

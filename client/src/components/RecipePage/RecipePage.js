@@ -15,18 +15,13 @@ const formatDate = (dateStr) => {
 const RecipePageLayout = ({recipe}) => (
     <div>
         <h1 className="h1">{recipe.name}</h1>
-        <img src="https://www.cscassets.com/recipes/wide_cknew/wide_32.jpg" className="recipe-page__img" />
+        <img src={recipe.imageURL} className="recipe-page__img" />
         <div className="recipe-page__description">{recipe.description}</div>
         <div className="recipe-page__blocks" >
-            <div className="recipe-page__block" style={{backgroundColor: 'yellow'}} >
+            <div className="recipe-page__block">
                 <h2 className="recipe-page__sub-title">Ingredients needed:</h2>
                 <ul className="recipe-page-list" >
-                    <li className="recipe-page-list__item" >2 x 170 g cans light meat tuna chunks</li>
-                    <li className="recipe-page-list__item" >2 x 170 g cans light meat tuna chunks</li>
-                    <li className="recipe-page-list__item" >2 x 170 g cans light meat tuna chunks</li>
-                    <li className="recipe-page-list__item" >2 x 170 g cans light meat tuna chunks</li>
-                    <li className="recipe-page-list__item" >2 x 170 g cans light meat tuna chunks</li>
-                    <li className="recipe-page-list__item" >2 x 170 g cans light meat tuna chunks</li>
+                    <li className="recipe-page-list__item" >{recipe.ingredients}</li>
                 </ul>
             </div>
             <div className="recipe-page__block" >

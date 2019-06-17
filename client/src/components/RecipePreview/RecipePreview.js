@@ -9,11 +9,9 @@ const formatDate = (dateStr) => {
 
 const RecipePreview = ({recipe}) => {
 
-    console.log('recipe', recipe)
-    
     return(
         <div className="recipe-preview" >
-            <img src="https://www.cscassets.com/recipes/wide_cknew/wide_32.jpg" className="recipe-preview__img" /> 
+            <img src={recipe.imageURL} className="recipe-preview__img" /> 
             <div className="recipe-preview__body" >
                 <Link to={`/recipe/${recipe._id}`} className="recipe-preview__title">{recipe.name}</Link>
                 <div className="recipe-preview__description" >{recipe.description}</div>
