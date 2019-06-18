@@ -27,7 +27,7 @@ exports.resolvers = {
             const recipe = await Recipe.findOne({_id})
             if(!recipe) throw new Error('Recipe not found')
             return recipe
-        }
+        },
     },
     Mutation: {
         addRecipe: async (root,args, {Recipe}) => {
@@ -61,5 +61,10 @@ exports.resolvers = {
                 token: createToken(user,process.env.SECRET,'1hr')
             }
         },
+        updateRecipe: async(root, {firstName,secondName}, {Recipe}) => {
+            const recipe = await Recipe.findOne({name: firstName})
+            recipe.name = secondName
+            return await recipe.save()
+        }
     }
 }

@@ -4,6 +4,7 @@ import {Query} from 'react-apollo'
 import Error from '../Error/Error'
 import Recipes from '../Recipes/Recipes'
 import Loader from '../Loader/Loader'
+import Search from '../Search/Search'
 
 const Home = () => (
     <main className="home" >

@@ -8,8 +8,9 @@ import RecipePage from '../RecipePage/RecipePage'
 import SignIn from '../SignIn/SignIn'
 import SignUp from '../SignUp/SignUp'
 import withSession from '../../HOC/withSession/withSession'
-import Cabinet from '../Cabinet/Cabinet'
 import AddRecipe from '../AddRecipe/AddRecipe'
+import Profile from '../Profile/Profile'
+import EditRecipe from '../EditRecipe/EditRecipe'
 
 const App = ({refetch,session}) => {
     return(
@@ -20,8 +21,9 @@ const App = ({refetch,session}) => {
                 <Route path="/recipe/:_id" component={RecipePage} />
                 <Route path="/signin" render={() => <SignIn refetch={refetch}/>} />
                 <Route path="/signup" render={() => <SignUp refetch={refetch}/>} />
-                <Route path="/cabinet" component={Cabinet} />
                 <Route path="/add-recipe" render={() => <AddRecipe session={session} /> } />
+                <Route path="/edit-recipe" component={EditRecipe} />
+                <Route path="/profile" component={Profile}/>
                 <Redirect to="/" />
             </Switch>
         </Router>
