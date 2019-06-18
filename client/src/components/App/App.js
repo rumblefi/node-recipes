@@ -11,6 +11,7 @@ import withSession from '../../HOC/withSession/withSession'
 import AddRecipe from '../AddRecipe/AddRecipe'
 import Profile from '../Profile/Profile'
 import EditRecipe from '../EditRecipe/EditRecipe'
+import GetRecipe from '../GetRecipe/GetRecipe'
 
 const App = ({refetch,session}) => {
     return(
@@ -19,6 +20,7 @@ const App = ({refetch,session}) => {
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/recipe/:_id" component={RecipePage} />
+                <Route path="/get-recipe/:_id" component={GetRecipe} />
                 <Route path="/signin" render={() => <SignIn refetch={refetch}/>} />
                 <Route path="/signup" render={() => <SignUp refetch={refetch}/>} />
                 <Route path="/add-recipe" render={() => <AddRecipe session={session} /> } />

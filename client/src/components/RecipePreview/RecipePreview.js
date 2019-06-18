@@ -14,6 +14,7 @@ const RecipePreview = ({recipe}) => {
             <img src={recipe.imageURL} className="recipe-preview__img" /> 
             <div className="recipe-preview__body" >
                 <Link to={`/recipe/${recipe._id}`} className="recipe-preview__title">{recipe.name}</Link>
+                <Link to={`/get-recipe/${recipe._id}`} className="recipe-preview__title">{recipe.name}</Link>
                 <div className="recipe-preview__description" >{recipe.description}</div>
                 <div className="recipe-preview-panel" >
                     <aside className="recipe-preview-panel__aside" >
