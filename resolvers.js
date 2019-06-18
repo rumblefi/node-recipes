@@ -47,7 +47,7 @@ exports.resolvers = {
                 password
             }).save()
             return{
-                token: createToken(newUser,process.env.SECRET,'1hr')
+                token: createToken(newUser,process.env.SECRET,'10hr')
             }
         },
         signinUser: async (root,{username,password},{User}) => {
@@ -58,7 +58,7 @@ exports.resolvers = {
             const isValidPassword = await bcrypt.compare(password,user.password)
             if(!isValidPassword) throw new Error('Invalid password')
             return{
-                token: createToken(user,process.env.SECRET,'1hr')
+                token: createToken(user,process.env.SECRET,'10hr')
             }
         },
         updateRecipe: async(root, {firstName,secondName}, {Recipe}) => {

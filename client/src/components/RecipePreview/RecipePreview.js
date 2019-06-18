@@ -21,7 +21,7 @@ const RecipePreview = ({recipe}) => {
                         <div className="recipe-preview-panel__user">Created by: <b>{recipe.username}</b> at <b>{formatDate(recipe.createdDate)}</b></div>
                     </aside>
                     <div className="recipe-preview-panel__buttons" >
-                        <Link to={`/recipe/${recipe._id}`} className="button button--1 recipe-preview-panel__button">Edit</Link>
+                        <Link to={`/edit-recipe/${recipe._id}`} className="button button--1 recipe-preview-panel__button">Edit</Link>
                         <div className="button button--2 recipe-preview-panel__button">Delete</div>
                     </div>
                 </div>
