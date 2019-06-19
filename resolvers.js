@@ -61,9 +61,14 @@ exports.resolvers = {
                 token: createToken(user,process.env.SECRET,'10hr')
             }
         },
-        updateRecipe: async(root, {firstName,secondName}, {Recipe}) => {
-            const recipe = await Recipe.findOne({name: firstName})
-            recipe.name = secondName
+        updateRecipe: async(root, {inputData: {_id,name,imageURL,description,category,ingredients,instructions}}, {Recipe}) => {
+            const recipe = await Recipe.findOne({_id})
+            recipe.name = name
+            recipe.imageURL = imageURL
+            recipe.description = description
+            recipe.category = category
+            recipe.ingredients = ingredients
+            recipe.instructions = instructions
             return await recipe.save()
         }
     }

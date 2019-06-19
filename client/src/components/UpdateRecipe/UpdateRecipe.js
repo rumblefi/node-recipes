@@ -1,11 +1,11 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
-import {Query} from 'react-apollo'
-import {GET_RECIPE} from '../../queries/index'
+import {Query, Mutation} from 'react-apollo'
+import {GET_RECIPE,ADD_RECIPE} from '../../queries/index'
 import Loader from '../Loader/Loader'
 import Error from '../Error/Error'
 
-class EditRecipe extends React.Component{
+class UpdateRecipe extends React.Component{
 
     state = {
         name: '',
@@ -38,16 +38,13 @@ class EditRecipe extends React.Component{
         const {name,imageURL,description,ingredients,instructions,category} = this.state
 
         return(
-
-            <Query query={GET_RECIPE} variables={{_id}} onCompleted={this.handleCompleteData} >
-
-                {({data,loading,error}) => {
-                    if(loading) return <Loader />
-                    if(error) return <Error error={error.message} />
-                    
-                    return(
-                        <div className="add-recipe" >
-                            <div className="container add-recipe__container" >
+            <div className="add-recipe" >
+                <div className="container add-recipe__container" >
+                    <Query query={GET_RECIPE} variables={{_id}} onCompleted={this.handleCompleteData} >
+                        {({data,loading,error}) => {
+                            if(loading) return <Loader />
+                            if(error) return <Error error={error.message} />
+                            return(
                                 <form className="form add-recipe__form" onSubmit={this.handleSubmit} >
                                     <h1 className="h1">Edit Recipe</h1>
                                     <label className="form-label" >
@@ -81,18 +78,15 @@ class EditRecipe extends React.Component{
                                     </label>
                                     <button className="button button--1 form__submit">Add Recipe</button>
                                 </form>                    
-                            </div>
-                        </div>
-                    )
-
-                }}
-
-            </Query>
-
+                            )
+                        }}
+                    </Query>
+                </div>
+            </div>
         )
 
     }
 
 }
 
-export default withRouter(EditRecipe)
+export default withRouter(UpdateRecipe)
