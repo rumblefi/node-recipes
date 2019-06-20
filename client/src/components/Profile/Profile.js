@@ -2,6 +2,7 @@ import React from 'react'
 import './Profile.scss'
 import UserInfo from '../UserInfo/UserInfo'
 import UserRecipes from '../UserRecipes/UserRecipes'
+import withAuth from '../../HOC/withAuth/withAuth'
 
 const Profile = ({session}) => {
     return(
@@ -12,4 +13,4 @@ const Profile = ({session}) => {
     )
 }
 
-export default Profile
+export default withAuth(Profile)

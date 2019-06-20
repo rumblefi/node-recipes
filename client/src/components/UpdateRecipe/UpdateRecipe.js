@@ -4,6 +4,7 @@ import {Query, Mutation} from 'react-apollo'
 import {GET_RECIPE,UPDATE_RECIPE,GET_ALL_RECIPES} from '../../queries/index'
 import Loader from '../Loader/Loader'
 import Error from '../Error/Error'
+import withAuth from '../../HOC/withAuth/withAuth'
 
 const initialState = {
     name: '',
@@ -139,4 +140,4 @@ class UpdateRecipe extends React.Component{
 
 }
 
-export default withRouter(UpdateRecipe)
+export default withAuth(withRouter(UpdateRecipe))
