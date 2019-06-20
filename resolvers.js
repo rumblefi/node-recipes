@@ -28,6 +28,9 @@ exports.resolvers = {
             if(!recipe) throw new Error('Recipe not found')
             return recipe
         },
+        getUserRecipes: async(root,{username}, {Recipe}) => {
+            return await Recipe.find({username})
+        }
     },
     Mutation: {
         addRecipe: async (root,args, {Recipe}) => {

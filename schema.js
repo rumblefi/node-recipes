@@ -21,6 +21,7 @@ exports.typeDefs = `
         email: String!
         joinDate: String
         favorites: [Recipe]
+        recipes: [Recipe]
     }
 
     type Token{
@@ -41,6 +42,7 @@ exports.typeDefs = `
         getAllRecipes: [Recipe]
         getCurrentUser: User
         getRecipe(_id: ID!): Recipe
+        getUserRecipes(username: String!): [Recipe]
     }
 
     type Mutation {

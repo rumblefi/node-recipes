@@ -3,7 +3,9 @@ import './RecipePreview.scss'
 import {Link} from 'react-router-dom'
 import {formatDate} from '../../helpers/formatDate'
 
-const RecipePreviewButtons = ({recipe}) => {
+const RecipePreviewButtons = ({recipe,session:{getCurrentUser}}) => {
+    if(!getCurrentUser) return null
+    if(getCurrentUser.username !== recipe.username) return null
     return(
         <div className="recipe-preview-panel__buttons" >
             <Link to={`/update-recipe/${recipe._id}`} className="button button--1 recipe-preview-panel__button">Edit</Link>
@@ -12,7 +14,7 @@ const RecipePreviewButtons = ({recipe}) => {
     )
 }
 
-const RecipePreview = ({recipe,session: {getCurrentUser}}) => {
+const RecipePreview = ({recipe,session}) => {
     return(
         <div className="recipe-preview" >
             <img src={recipe.imageURL} className="recipe-preview__img" /> 
@@ -22,7 +24,7 @@ const RecipePreview = ({recipe,session: {getCurrentUser}}) => {
                 <div className="recipe-preview-panel" >
                     <ul className="recipe-preview-panel__list">
                         <li>
-                            Category: <Link to="/" exact>{recipe.category}</Link>
+                            Category: <Link to="/" exact="true">{recipe.category}</Link>
                         </li>
                         <li>
                             Created by: <b>{recipe.username}</b>
@@ -34,7 +36,7 @@ const RecipePreview = ({recipe,session: {getCurrentUser}}) => {
                             Update: <b>{formatDate(recipe.updatedAt)}</b>
                         </li>
                     </ul>
-                    {getCurrentUser && <RecipePreviewButtons recipe={recipe} />}
+                    <RecipePreviewButtons recipe={recipe} session={session} />
                 </div>
             </div>
         </div>

@@ -2,7 +2,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 const UserInfo = ({session:{getCurrentUser}}) => {
-    console.log('fuck', getCurrentUser)
     return(
         <div className="user-info" >
             <div>Username: <b>{getCurrentUser.username}</b></div>

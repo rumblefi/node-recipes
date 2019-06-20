@@ -24,7 +24,13 @@ const UserSchema = new Schema({
     favorites: {
         type: [Schema.Types.ObjectId],
         ref: 'Recipe'
-    }
+    },
+    recipes: [
+        {
+            type: [Schema.Types.ObjectId],
+            ref: 'Recipe'
+        }
+    ]
 })
 
 UserSchema.pre('save', function(next) {
