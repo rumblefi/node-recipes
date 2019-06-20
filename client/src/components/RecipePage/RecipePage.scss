@@ -73,6 +73,23 @@
             align-items: center;
         }
 
+        &__list{
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+
+            li{
+                margin-right: 25px;
+
+                &:last-child{
+                    margin-right: 0;
+                }
+
+            }
+            
+        }
+
     }
 
     &__category{

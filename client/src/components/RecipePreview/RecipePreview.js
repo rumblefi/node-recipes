@@ -1,11 +1,7 @@
 import React from 'react'
 import './RecipePreview.scss'
 import {Link} from 'react-router-dom'
-
-const formatDate = (dateStr) => {
-    const date = new Date(dateStr)
-    return date.toLocaleDateString()
-}
+import {formatDate} from '../../helpers/formatDate'
 
 const RecipePreviewButtons = ({recipe}) => {
     return(
@@ -24,11 +20,20 @@ const RecipePreview = ({recipe,session: {getCurrentUser}}) => {
                 <Link to={`/recipe/${recipe._id}`} className="recipe-preview__title">{recipe.name}</Link>
                 <div className="recipe-preview__description" >{recipe.description}</div>
                 <div className="recipe-preview-panel" >
-                    <aside className="recipe-preview-panel__aside" >
-                        <div className="recipe-preview-panel__category">Category: <a href="">{recipe.category}</a></div>
-                        <div className="recipe-preview-panel__user">Created by: <b>{recipe.username}</b> at <b>{formatDate(recipe.createdAt)}</b></div>
-                        <div className="recipe-preview-panel__user">Updated at: <b>{formatDate(recipe.updatedAt)}</b></div>
-                    </aside>
+                    <ul className="recipe-preview-panel__list">
+                        <li>
+                            Category: <Link to="/" exact>{recipe.category}</Link>
+                        </li>
+                        <li>
+                            Created by: <b>{recipe.username}</b>
+                        </li>
+                        <li>
+                            Create: <b>{formatDate(recipe.createdAt)}</b>
+                        </li>
+                        <li>
+                            Update: <b>{formatDate(recipe.updatedAt)}</b>
+                        </li>
+                    </ul>
                     {getCurrentUser && <RecipePreviewButtons recipe={recipe} />}
                 </div>
             </div>

@@ -6,11 +6,7 @@ import {Query} from 'react-apollo'
 import {GET_RECIPE} from '../../queries/index'
 import Error from '../Error/Error'
 import Loader from '../Loader/Loader'
-
-const formatDate = (dateStr) => {
-    const date = new Date(dateStr)
-    return date.toLocaleDateString()
-}
+import {formatDate} from '../../helpers/formatDate'
 
 const RecipePageLayout = ({recipe,session}) => {
     return(
@@ -33,8 +29,20 @@ const RecipePageLayout = ({recipe,session}) => {
             <div className="recipe-page-panel">
                 <Like count={recipe.likes} session={session} />
                 <div className="recipe-page-panel__right" >
-                    <div className="recipe-page__category">Category: <a href="">{recipe.category}</a></div>
-                    <div className="recipe-page__user">Created by: <b>{recipe.username}</b> at <b>{formatDate(recipe.createdDate)}</b></div>
+                    <ul className="recipe-page-panel__list" >
+                        <li>
+                            Category: <Link to="/" exact >{recipe.category}</Link>
+                        </li>
+                        <li>
+                            Created by: <b>{recipe.username}</b>
+                        </li>
+                        <li>
+                            Created: <b>{formatDate(recipe.createdAt)}</b>
+                        </li>
+                        <li>
+                            Update: <b>{formatDate(recipe.updatedAt)}</b>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div className="recipe-page__back-wrapper">
