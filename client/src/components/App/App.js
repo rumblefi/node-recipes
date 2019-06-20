@@ -22,7 +22,7 @@ const App = ({refetch,session}) => {
                 <Route path="/signin" render={() => <SignIn refetch={refetch}/>} />
                 <Route path="/signup" render={() => <SignUp refetch={refetch}/>} />
                 <Route path="/add-recipe" render={() => <AddRecipe session={session} /> } />
-                <Route path="/update-recipe/:_id" component={UpdateRecipe} />
+                <Route path="/update-recipe/:_id" render={() => <UpdateRecipe refetch={refetch}/> } />
                 <Route path="/profile" component={Profile}/>
                 <Redirect to="/" />
             </Switch>

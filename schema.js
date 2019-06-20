@@ -34,12 +34,12 @@ exports.typeDefs = `
 
     input UpdateRecipeInput {
         _id: ID!
-        name: String
-        imageURL: String
-        description: String
-        category: String
-        ingredients: String
-        instructions: String
+        name: String!
+        imageURL: String!
+        description: String!
+        category: String!
+        ingredients: String!
+        instructions: String!
     }
 
     type Mutation {

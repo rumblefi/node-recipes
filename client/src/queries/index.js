@@ -27,6 +27,7 @@ export const GET_CURRENT_USER = gql`
 export const GET_RECIPE = gql`
     query($_id: ID!) {
         getRecipe(_id: $_id) {
+            _id
             name
             description
             instructions
@@ -62,6 +63,24 @@ export const ADD_RECIPE = gql`
         addRecipe(name: $name, imageURL: $imageURL, description: $description, category: $category, ingredients: $ingredients, instructions: $instructions, username: $username){
             _id
             name
+        }
+    }
+`
+
+export const UPDATE_RECIPE = gql`
+    mutation($inputData: UpdateRecipeInput!) {
+        updateRecipe(inputData: $inputData) {
+            _id
+            name
+            description
+            instructions
+            category
+            username
+            createdDate
+            likes
+            createdDate
+            imageURL
+            ingredients
         }
     }
 `

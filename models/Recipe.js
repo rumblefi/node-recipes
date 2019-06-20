@@ -26,10 +26,6 @@ const RecipeSchema = new Schema({
         type: String,
         required: true
     },
-    createdDate: {
-        type: Date,
-        default: Date.now
-    },
     likes: {
         type: Number,
         default: 0
@@ -37,6 +33,8 @@ const RecipeSchema = new Schema({
     username: {
         type: String
     }
+},{
+    timestamps: true
 })
 
 module.exports = mongoose.model('Recipe', RecipeSchema)

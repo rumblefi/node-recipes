@@ -63,6 +63,7 @@ exports.resolvers = {
         },
         updateRecipe: async(root, {inputData: {_id,name,imageURL,description,category,ingredients,instructions}}, {Recipe}) => {
             const recipe = await Recipe.findOne({_id})
+            if(!recipe) throw new Error('Recipe not found')
             recipe.name = name
             recipe.imageURL = imageURL
             recipe.description = description
