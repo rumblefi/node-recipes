@@ -6,7 +6,7 @@ import Recipes from '../Recipes/Recipes'
 import Loader from '../Loader/Loader'
 import Search from '../Search/Search'
 
-const Home = () => (
+const Home = ({session}) => (
     <main className="home" >
         <div className="container">
             <h1 className="h1">Recipies</h1>
@@ -14,7 +14,7 @@ const Home = () => (
                 {({data,loading,error}) => {
                     if(loading) return <Loader /> 	
                     if(error) return <Error error={error.message} />
-                    if(data.getAllRecipes.length > 0) return <Recipes recipes={data} /> 
+                    if(data.getAllRecipes.length > 0) return <Recipes session={session} recipes={data} /> 
                     return <span>No recipes</span>
                 }}
             </Query>

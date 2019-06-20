@@ -7,8 +7,16 @@ const formatDate = (dateStr) => {
     return date.toLocaleDateString()
 }
 
-const RecipePreview = ({recipe}) => {
+const RecipePreviewButtons = ({recipe}) => {
+    return(
+        <div className="recipe-preview-panel__buttons" >
+            <Link to={`/update-recipe/${recipe._id}`} className="button button--1 recipe-preview-panel__button">Edit</Link>
+            <div className="button button--2 recipe-preview-panel__button">Delete</div>
+        </div>
+    )
+}
 
+const RecipePreview = ({recipe,session: {getCurrentUser}}) => {
     return(
         <div className="recipe-preview" >
             <img src={recipe.imageURL} className="recipe-preview__img" /> 
@@ -21,10 +29,7 @@ const RecipePreview = ({recipe}) => {
                         <div className="recipe-preview-panel__user">Created by: <b>{recipe.username}</b> at <b>{formatDate(recipe.createdAt)}</b></div>
                         <div className="recipe-preview-panel__user">Updated at: <b>{formatDate(recipe.updatedAt)}</b></div>
                     </aside>
-                    <div className="recipe-preview-panel__buttons" >
-                        <Link to={`/update-recipe/${recipe._id}`} className="button button--1 recipe-preview-panel__button">Edit</Link>
-                        <div className="button button--2 recipe-preview-panel__button">Delete</div>
-                    </div>
+                    {getCurrentUser && <RecipePreviewButtons recipe={recipe} />}
                 </div>
             </div>
         </div>

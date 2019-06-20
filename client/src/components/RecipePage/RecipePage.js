@@ -12,37 +12,39 @@ const formatDate = (dateStr) => {
     return date.toLocaleDateString()
 }
 
-const RecipePageLayout = ({recipe}) => (
-    <div>
-        <h1 className="h1">{recipe.name}</h1>
-        <img src={recipe.imageURL} className="recipe-page__img" />
-        <div className="recipe-page__description">{recipe.description}</div>
-        <div className="recipe-page__blocks" >
-            <div className="recipe-page__block">
-                <h2 className="recipe-page__sub-title">Ingredients needed:</h2>
-                <ul className="recipe-page-list" >
-                    <li className="recipe-page-list__item" >{recipe.ingredients}</li>
-                </ul>
+const RecipePageLayout = ({recipe,session}) => {
+    return(
+        <div>
+            <h1 className="h1">{recipe.name}</h1>
+            <img src={recipe.imageURL} className="recipe-page__img" />
+            <div className="recipe-page__description">{recipe.description}</div>
+            <div className="recipe-page__blocks" >
+                <div className="recipe-page__block">
+                    <h2 className="recipe-page__sub-title">Ingredients needed:</h2>
+                    <ul className="recipe-page-list" >
+                        <li className="recipe-page-list__item" >{recipe.ingredients}</li>
+                    </ul>
+                </div>
+                <div className="recipe-page__block" >
+                    <h2 className="recipe-page__sub-title">Reciepe instructions</h2>
+                    <div className="recipe-page__instructions">{recipe.instructions}</div>
+                </div>
             </div>
-            <div className="recipe-page__block" >
-                <h2 className="recipe-page__sub-title">Reciepe instructions</h2>
-                <div className="recipe-page__instructions">{recipe.instructions}</div>
+            <div className="recipe-page-panel">
+                <Like count={recipe.likes} session={session} />
+                <div className="recipe-page-panel__right" >
+                    <div className="recipe-page__category">Category: <a href="">{recipe.category}</a></div>
+                    <div className="recipe-page__user">Created by: <b>{recipe.username}</b> at <b>{formatDate(recipe.createdDate)}</b></div>
+                </div>
+            </div>
+            <div className="recipe-page__back-wrapper">
+                <Link to="/" exact="true" className="button button--1 recipe-page__back">Back</Link>
             </div>
         </div>
-        <div className="recipe-page-panel">
-            <Like count={recipe.likes} />
-            <div className="recipe-page-panel__right" >
-                <div className="recipe-page__category">Category: <a href="">{recipe.category}</a></div>
-                <div className="recipe-page__user">Created by: <b>{recipe.username}</b> at <b>{formatDate(recipe.createdDate)}</b></div>
-            </div>
-        </div>
-        <div className="recipe-page__back-wrapper">
-            <Link to="/" exact className="button button--1 recipe-page__back">Back</Link>
-        </div>
-    </div>
-)
+    )
+}
 
-const RecipePage = ({match}) => {
+const RecipePage = ({match,session}) => {
 
     const {_id} = match.params
 
@@ -53,7 +55,7 @@ const RecipePage = ({match}) => {
                     {({data,loading,error}) => {
                         if(loading) return <Loader />
                         if(error) return <Error error={error.message} />
-                        return <RecipePageLayout recipe={data.getRecipe} />
+                        return <RecipePageLayout recipe={data.getRecipe} session={session} />
                     }}
                 </Query>
             </div>
