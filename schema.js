@@ -27,12 +27,6 @@ exports.typeDefs = `
         token: String!
     }
 
-    type Query {
-        getAllRecipes: [Recipe]
-        getCurrentUser: User
-        getRecipe(_id: ID!): Recipe
-    }
-
     input UpdateRecipeInput {
         _id: ID!
         name: String!
@@ -43,11 +37,18 @@ exports.typeDefs = `
         instructions: String!
     }
 
+    type Query {
+        getAllRecipes: [Recipe]
+        getCurrentUser: User
+        getRecipe(_id: ID!): Recipe
+    }
+
     type Mutation {
         addRecipe(name: String!, imageURL: String!, description: String!, category: String!, ingredients: String!, instructions: String!, username: String): Recipe
         signinUser(username: String!, password: String!): Token
         signupUser(username: String!, email: String!, password: String!): Token
         updateRecipe(inputData: UpdateRecipeInput!): Recipe
+        addFavorite(_id:ID!):User!
     }
 
 `

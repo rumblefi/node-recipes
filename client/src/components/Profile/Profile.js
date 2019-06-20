@@ -1,9 +1,12 @@
 import React from 'react'
 import './Profile.scss'
+import UserInfo from '../UserInfo/UserInfo'
 
-const Profile = () => {
+const Profile = ({session}) => {
     return(
-        <div>Profile</div>
+        <div className="container" >
+            <UserInfo session={session} />
+        </div>
     )
 }
 

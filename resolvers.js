@@ -71,6 +71,12 @@ exports.resolvers = {
             recipe.ingredients = ingredients
             recipe.instructions = instructions
             return await recipe.save()
+        },
+        addFavorite: async(root,{_id}, {User}) => {
+            const user = await User.findOne({username:"Yuriy Bahur"})
+            if(!user) throw new Error('No user found')
+            user.favorites = [_id]
+            return await user.save()
         }
     }
 }
