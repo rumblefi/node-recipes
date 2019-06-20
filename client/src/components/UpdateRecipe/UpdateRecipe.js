@@ -76,7 +76,7 @@ class UpdateRecipe extends React.Component{
         return(
             <div className="add-recipe" >
                 <div className="container add-recipe__container" >
-                    <Query query={GET_RECIPE} variables={{_id}} onCompleted={this.handleCompleteData} >
+                    <Query query={GET_RECIPE} variables={{_id}} onCompleted={this.handleCompleteData} update={this.updateFuck} >
                         {({data,loading,error}) => {
                             if(loading) return <Loader />
                             if(error) return <Error error={error.message} />

@@ -8,9 +8,10 @@ exports.typeDefs = `
         description: String!
         ingredients: String!
         instructions: String!
-        createdDate: String
         likes: Int
         username: String
+        createdAt: String!
+        updatedAt: String!
     }
 
     type User {

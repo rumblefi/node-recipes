@@ -7,9 +7,10 @@ export const GET_ALL_RECIPES = gql`
             name
             description
             category
-            createdDate
             username
             imageURL
+            createdAt
+            updatedAt
         }
     }
 `
@@ -33,9 +34,9 @@ export const GET_RECIPE = gql`
             instructions
             category
             username
-            createdDate
             likes
-            createdDate
+            createdAt
+            updatedAt
             imageURL
             ingredients
         }
@@ -76,11 +77,11 @@ export const UPDATE_RECIPE = gql`
             instructions
             category
             username
-            createdDate
+            createdAt
             likes
-            createdDate
             imageURL
             ingredients
+            updatedAt
         }
     }
 `

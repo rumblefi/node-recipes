@@ -18,7 +18,8 @@ const RecipePreview = ({recipe}) => {
                 <div className="recipe-preview-panel" >
                     <aside className="recipe-preview-panel__aside" >
                         <div className="recipe-preview-panel__category">Category: <a href="">{recipe.category}</a></div>
-                        <div className="recipe-preview-panel__user">Created by: <b>{recipe.username}</b> at <b>{formatDate(recipe.createdDate)}</b></div>
+                        <div className="recipe-preview-panel__user">Created by: <b>{recipe.username}</b> at <b>{formatDate(recipe.createdAt)}</b></div>
+                        <div className="recipe-preview-panel__user">Updated at: <b>{formatDate(recipe.updatedAt)}</b></div>
                     </aside>
                     <div className="recipe-preview-panel__buttons" >
                         <Link to={`/update-recipe/${recipe._id}`} className="button button--1 recipe-preview-panel__button">Edit</Link>
