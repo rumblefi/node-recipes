@@ -19,10 +19,27 @@ const LikeAuth = ({count}) => {
     )
 }
 
-const Like = ({count,session:{getCurrentUser}}) => {
-    console.log('session', getCurrentUser)
-    if(getCurrentUser) return <LikeAuth count={count} />
-    return <LikeUnAuth count={count} />
+class Like extends React.Component{
+
+    // render() {
+    //     const {count,session:{getCurrentUser}} = this.props
+    //     if(getCurrentUser) return <LikeAuth count={count} />
+    //     return <LikeUnAuth count={count} />
+    // }
+
+    render() {
+
+        const {count} = this.props
+
+        return(
+            <div className="like" >
+                <div className="like__heart"></div>    
+                <div className="like__counter">{count}</div>
+            </div>
+        )
+
+    }
+
 }
 
 export default Like

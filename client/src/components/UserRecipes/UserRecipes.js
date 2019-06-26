@@ -14,13 +14,16 @@ const UserRecipes = ({session,refetch}) => {
                     if(loading) return null
                     if(error) return <Error error={error.message} />
                     return(
-                        <ul>
-                            {getUserRecipes.map(recipe => {
-                                return(
-                                    <UserRecipe key={recipe._id} recipe={recipe} session={session} refetch={refetch} />
-                                )
-                            })}
-                        </ul>
+                        <div>
+                            {!getUserRecipes.length && <div>No recipes</div> }
+                            <ul>
+                                {getUserRecipes.map(recipe => {
+                                    return(
+                                        <UserRecipe key={recipe._id} recipe={recipe} session={session} refetch={refetch} />
+                                    )
+                                })}
+                            </ul>
+                        </div>
                     )
                 }}
             </Query>
