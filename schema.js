@@ -51,6 +51,7 @@ exports.typeDefs = `
         signupUser(username: String!, email: String!, password: String!): Token
         updateRecipe(inputData: UpdateRecipeInput!): Recipe
         addFavorite(_id:ID!):User!
+        deleteRecipe(_id:ID!): Recipe
     }
 
 `

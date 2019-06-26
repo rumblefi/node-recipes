@@ -80,6 +80,11 @@ exports.resolvers = {
             if(!user) throw new Error('No user found')
             user.favorites = [_id]
             return await user.save()
+        },
+        deleteRecipe: async(root,{_id}, {Recipe}) => {
+            const recipe = await Recipe.findOne({_id})
+            if(!recipe) throw new Error('Recipe not found')
+            return await recipe.remove()
         }
     }
 }

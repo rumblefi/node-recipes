@@ -99,3 +99,12 @@ export const UPDATE_RECIPE = gql`
         }
     }
 `
+
+export const DELETE_RECIPE = gql`
+    mutation($_id: ID!) {
+        deleteRecipe(_id: $_id) {
+            _id
+            name
+        }
+    }
+`

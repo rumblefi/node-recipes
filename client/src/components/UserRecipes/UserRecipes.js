@@ -2,10 +2,10 @@ import React from 'react'
 import {Query} from 'react-apollo'
 import {GET_USER_RECIPES} from '../../queries/index'
 import Error from '../Error/Error'
-import {Link} from 'react-router-dom'
+import UserRecipe from '../UserRecipe/UserRecipe'
 
-const UserRecipes = ({session: {getCurrentUser}}) => {
-    const {username} = getCurrentUser
+const UserRecipes = ({session,refetch}) => {
+    const {username} = session.getCurrentUser
     return(
         <div>
             <h1>Your recipes</h1>
@@ -17,10 +17,7 @@ const UserRecipes = ({session: {getCurrentUser}}) => {
                         <ul>
                             {getUserRecipes.map(recipe => {
                                 return(
-                                    <li key={recipe._id} >
-                                        <Link to={`/recipe/${recipe._id}`} >{recipe.name}</Link>
-                                        <div>{recipe.description}</div>
-                                    </li>
+                                    <UserRecipe key={recipe._id} recipe={recipe} session={session} refetch={refetch} />
                                 )
                             })}
                         </ul>
