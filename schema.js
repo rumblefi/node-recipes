@@ -52,6 +52,7 @@ exports.typeDefs = `
         updateRecipe(inputData: UpdateRecipeInput!): Recipe
         addFavorite(_id:ID!):User!
         deleteRecipe(_id:ID!): Recipe
+        likeRecipe(_id: ID!, doIncrement: Boolean!): Recipe
     }
 
 `

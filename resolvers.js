@@ -85,6 +85,20 @@ exports.resolvers = {
             const recipe = await Recipe.findOne({_id})
             if(!recipe) throw new Error('Recipe not found')
             return await recipe.remove()
+        },
+        likeRecipe: async(root,{_id,doIncrement}, {Recipe}) => {
+            if(doIncrement) {
+                return await Recipe.findOneAndUpdate(
+                    {_id},
+                    {$inc:{likes:1}},
+                    {new: true}
+                )
+            }
+            return await Recipe.findOneAndUpdate(
+                {_id},
+                {$inc:{likes:-1}},
+                {new: true}
+            )
         }
     }
 }
