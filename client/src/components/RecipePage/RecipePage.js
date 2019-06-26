@@ -27,11 +27,11 @@ const RecipePageLayout = ({recipe,session}) => {
                 </div>
             </div>
             <div className="recipe-page-panel">
-                <Like count={recipe.likes} session={session} />
+                <Like recipe={recipe} session={session} />
                 <div className="recipe-page-panel__right" >
                     <ul className="recipe-page-panel__list" >
                         <li>
-                            Category: <Link to="/" exact >{recipe.category}</Link>
+                            Category: <Link to="/" exact="true" >{recipe.category}</Link>
                         </li>
                         <li>
                             Created by: <b>{recipe.username}</b>

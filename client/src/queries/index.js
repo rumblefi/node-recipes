@@ -108,3 +108,11 @@ export const DELETE_RECIPE = gql`
         }
     }
 `
+
+export const LIKE_RECIPE = gql`
+    mutation($_id: ID!, $doIncrement: Boolean!) {
+        likeRecipe(_id: $_id,doIncrement: $doIncrement) {
+            likes
+        }
+    }
+`
