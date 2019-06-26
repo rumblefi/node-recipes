@@ -1,7 +1,7 @@
 import React from 'react'
 import './AddRecipe.scss'
 import {Mutation} from 'react-apollo'
-import {ADD_RECIPE, GET_ALL_RECIPES} from '../../queries/index'
+import {ADD_RECIPE, GET_ALL_RECIPES, GET_USER_RECIPES} from '../../queries/index'
 import Error from '../Error/Error'
 import {withRouter} from 'react-router-dom'
 import withAuth from '../../HOC/withAuth/withAuth'
@@ -66,7 +66,17 @@ class AddRecipe extends React.Component{
             <div className="add-recipe" >
                 <div className="container add-recipe__container" >
 
-                    <Mutation mutation={ADD_RECIPE} variables={{name,imageURL,description,ingredients,instructions,category,username}} update={this.updateCache} >
+                    <Mutation 
+                        mutation={ADD_RECIPE} 
+                        variables={{name,imageURL,description,ingredients,instructions,category,username}} 
+                        update={this.updateCache} 
+                        refetchQueries={() => [
+                            {
+                                query: GET_USER_RECIPES,
+                                variables: {username}
+                            }
+                        ]}
+                    >
 
                         {(addRecipe,{data,loading,error}) => {
                             if(error) return <Error error={error.message} />
