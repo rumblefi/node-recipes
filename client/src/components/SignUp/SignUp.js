@@ -4,6 +4,7 @@ import {Mutation} from 'react-apollo'
 import {SIGNUP_USER} from '../../queries/index'
 import Error from '../Error/Error'
 import {withRouter} from 'react-router-dom'
+import withUnAuth from '../../HOC/withUnAuth/withUnAuth'
 
 const initialState = {
     username: '',
@@ -74,4 +75,4 @@ class SignUp extends React.Component{
 
 }
 
-export default withRouter(SignUp)
+export default withUnAuth(withRouter(SignUp))
