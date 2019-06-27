@@ -95,6 +95,14 @@ exports.resolvers = {
                     {new: true}
                 )
             }
+            await User.updateOne({username}, { 
+                $pull: { favorites: recipeId }
+            })
+            return await Recipe.findOneAndUpdate(
+                {_id:recipeId},
+                {$inc:{likes:-1}},
+                {new: true}
+            )
         },
     }
 }
