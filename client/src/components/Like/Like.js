@@ -30,7 +30,11 @@ class Like extends React.Component{
     // }
 
     state = {
-        isLiked: null
+        isRecipeLiked: false
+    }
+
+    handleIsRecipeLikedData = ({isRecipeLiked}) => {
+        this.setState({isRecipeLiked})
     }
 
     handleLikeRecipe = async(likeRecipe) => {
@@ -46,10 +50,11 @@ class Like extends React.Component{
 
         const {recipe,session} = this.props
         const {getCurrentUser: {username}} = session
+        const {isRecipeLiked} = this.state
 
         return(
 
-            <Mutation mutation={LIKE_RECIPE} variables={{recipeId:recipe._id,username}} >
+            <Mutation mutation={LIKE_RECIPE} variables={{recipeId:recipe._id,username,doIncrement:!isRecipeLiked}} >
 
                 {(likeRecipe,{data,loading,error}) => {
 
@@ -57,13 +62,13 @@ class Like extends React.Component{
 
                     return(
 
-                        <Query query={IS_RECIPE_LIKED} variables={{recipeId:recipe._id,username}} >
+                        <Query query={IS_RECIPE_LIKED} variables={{recipeId:recipe._id,username}} onCompleted={this.handleIsRecipeLikedData} >
 
                             {({data,loading,error}) => {
 
                                 return(
                                     <div 
-                                        className={data.isRecipeLiked ? 'like is-liked': 'like'} onClick={() => this.handleLikeRecipe(likeRecipe)} >
+                                        className={isRecipeLiked ? 'like is-liked': 'like'} onClick={() => this.handleLikeRecipe(likeRecipe)} >
                                         <div className="like__heart"></div>    
                                         <div className="like__counter">{recipe.likes}</div>
                                     </div>

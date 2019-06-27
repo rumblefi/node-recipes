@@ -52,7 +52,7 @@ exports.typeDefs = `
         signupUser(username: String!, email: String!, password: String!): Token
         updateRecipe(inputData: UpdateRecipeInput!): Recipe
         deleteRecipe(_id:ID!): Recipe
-        likeRecipe(recipeId: ID!, username: String!): Recipe
+        likeRecipe(recipeId: ID!, username: String!, doIncrement: Boolean!): Recipe
     }
 
 `

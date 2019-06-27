@@ -116,8 +116,8 @@ export const DELETE_RECIPE = gql`
 `
 
 export const LIKE_RECIPE = gql`
-    mutation($recipeId: ID!,$username: String!) {
-        likeRecipe(recipeId: $recipeId, username: $username) {
+    mutation($recipeId: ID!,$username: String!, $doIncrement: Boolean!) {
+        likeRecipe(recipeId: $recipeId, username: $username, doIncrement: $doIncrement) {
             likes
         }
     }
