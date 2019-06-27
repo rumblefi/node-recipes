@@ -104,5 +104,8 @@ exports.resolvers = {
                 {new: true}
             )
         },
+        testLikeRecipe: async(root,{_id,username},{Recipe,User}) => {
+            const recipe = Recipe.findOneAndUpdate({_id},{$inc: {likes: 1}})
+        }
     }
 }

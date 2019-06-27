@@ -53,6 +53,7 @@ exports.typeDefs = `
         updateRecipe(inputData: UpdateRecipeInput!): Recipe
         deleteRecipe(_id:ID!): Recipe
         likeRecipe(recipeId: ID!, username: String!, doIncrement: Boolean!): Recipe
+        testLikeRecipe(_id: ID!, username: String!): Recipe
     }
 
 `

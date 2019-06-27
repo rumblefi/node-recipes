@@ -7,6 +7,7 @@ import {GET_RECIPE} from '../../queries/index'
 import Error from '../Error/Error'
 import Loader from '../Loader/Loader'
 import {formatDate} from '../../helpers/formatDate'
+import TestLikeRecipe from '../TestLikeRecipe/TestLikeRecipe'
 
 const RecipePageLayout = ({recipe,session}) => {
     return(
@@ -28,6 +29,7 @@ const RecipePageLayout = ({recipe,session}) => {
             </div>
             <div className="recipe-page-panel">
                 <Like recipe={recipe} session={session} />
+                <TestLikeRecipe _id={recipe._id} />
                 <div className="recipe-page-panel__right" >
                     <ul className="recipe-page-panel__list" >
                         <li>
