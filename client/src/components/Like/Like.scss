@@ -23,6 +23,15 @@
 
     }
 
+    &--unauth{
+        cursor: auto;
+
+        #{$this}__title{
+            margin-right: 5px;
+        }
+
+    }
+
     &__heart {
         position: relative;
         display: block;

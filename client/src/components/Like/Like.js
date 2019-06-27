@@ -3,31 +3,16 @@ import './Like.scss'
 import {Query,Mutation} from 'react-apollo'
 import {LIKE_RECIPE,IS_RECIPE_LIKED,GET_RECIPE, GET_ALL_RECIPES} from '../../queries/index'
 
-const LikeUnAuth = ({count}) => {
+const LikeUnAuth = ({recipe}) => {
     return(
-        <div className="like" style={{display:'block'}} >
+        <div className="like like--unauth">
             <span className="like__title">Likes</span>
-            <span className="like__counter"> {count}</span>
+            <span className="like__counter">{recipe.likes}</span>
         </div>
     )
 }
 
-const LikeAuth = ({count}) => {
-    return(
-        <div className="like" >
-            <div className="like__heart"></div>    
-            <div className="like__counter">{count}</div>
-        </div>
-    )
-}
-
-class Like extends React.Component{
-
-    // render() {
-    //     const {count,session:{getCurrentUser}} = this.props
-    //     if(getCurrentUser) return <LikeAuth count={count} />
-    //     return <LikeUnAuth count={count} />
-    // }
+class LikeAuth extends React.Component{
 
     state = {
         isRecipeLiked: false
@@ -66,7 +51,8 @@ class Like extends React.Component{
     render() {
 
         const {recipe,session} = this.props
-        const {getCurrentUser: {username}} = session
+        const {getCurrentUser} = session
+        const username = getCurrentUser ? getCurrentUser.username : null
         const {isRecipeLiked} = this.state
 
         return(
@@ -107,6 +93,11 @@ class Like extends React.Component{
 
     }
 
+}
+
+const Like = ({recipe,session}) => {
+    if(session.getCurrentUser) return <LikeAuth recipe={recipe} session={session} />
+    return <LikeUnAuth recipe={recipe} />
 }
 
 export default Like
