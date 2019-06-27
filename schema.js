@@ -43,6 +43,7 @@ exports.typeDefs = `
         getCurrentUser: User
         getRecipe(_id: ID!): Recipe
         getUserRecipes(username: String!): [Recipe]
+        isRecipeLiked(recipeId: ID!, username: String!): Boolean 
     }
 
     type Mutation {
@@ -50,9 +51,8 @@ exports.typeDefs = `
         signinUser(username: String!, password: String!): Token
         signupUser(username: String!, email: String!, password: String!): Token
         updateRecipe(inputData: UpdateRecipeInput!): Recipe
-        addFavorite(_id:ID!):User!
         deleteRecipe(_id:ID!): Recipe
-        likeRecipe(_id: ID!, doIncrement: Boolean!): Recipe
+        likeRecipe(recipeId: ID!, username: String!): Recipe
     }
 
 `

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Like.scss'
-import {Mutation} from 'react-apollo'
-import {LIKE_RECIPE} from '../../queries/index'
+import {Query,Mutation} from 'react-apollo'
+import {LIKE_RECIPE,IS_RECIPE_LIKED} from '../../queries/index'
 
 const LikeUnAuth = ({count}) => {
     return(
@@ -30,7 +30,7 @@ class Like extends React.Component{
     // }
 
     state = {
-        doIncrement: false
+        isLiked: null
     }
 
     handleLikeRecipe = async(likeRecipe) => {
@@ -44,23 +44,34 @@ class Like extends React.Component{
 
     render() {
 
-        const {recipe} = this.props
-        const {doIncrement} = this.state
-
-        console.log('doIncrement', doIncrement)
+        const {recipe,session} = this.props
+        const {getCurrentUser: {username}} = session
 
         return(
-            <Mutation mutation={LIKE_RECIPE} variables={{_id:recipe._id,doIncrement}} >
+
+            <Mutation mutation={LIKE_RECIPE} variables={{recipeId:recipe._id,username}} >
 
                 {(likeRecipe,{data,loading,error}) => {
 
                     if(error) console.error(error) 
 
                     return(
-                        <div className="like" onClick={() => this.handleLikeRecipe(likeRecipe)} >
-                            <div className="like__heart"></div>    
-                            <div className="like__counter">{recipe.likes}</div>
-                        </div>
+
+                        <Query query={IS_RECIPE_LIKED} variables={{recipeId:recipe._id,username}} >
+
+                            {({data,loading,error}) => {
+
+                                return(
+                                    <div 
+                                        className={data.isRecipeLiked ? 'like is-liked': 'like'} onClick={() => this.handleLikeRecipe(likeRecipe)} >
+                                        <div className="like__heart"></div>    
+                                        <div className="like__counter">{recipe.likes}</div>
+                                    </div>
+                                )
+
+                            }}
+
+                        </Query>
                     )
 
                 }}

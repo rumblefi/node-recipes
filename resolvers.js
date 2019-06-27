@@ -30,6 +30,10 @@ exports.resolvers = {
         },
         getUserRecipes: async(root,{username}, {Recipe}) => {
             return await Recipe.find({username}).sort({createdAt: 'desc'})
+        },
+        isRecipeLiked: async(root,{recipeId,username}, {User}) => {
+            const user = await User.findOne({username})            
+            return await user.favorites.some(recipe => recipe.equals(recipeId))
         }
     },
     Mutation: {
@@ -75,30 +79,20 @@ exports.resolvers = {
             recipe.instructions = instructions
             return await recipe.save()
         },
-        addFavorite: async(root,{_id}, {User}) => {
-            const user = await User.findOne({username:"Yuriy Bahur"})
-            if(!user) throw new Error('No user found')
-            user.favorites = [_id]
-            return await user.save()
-        },
         deleteRecipe: async(root,{_id}, {Recipe}) => {
             const recipe = await Recipe.findOne({_id})
             if(!recipe) throw new Error('Recipe not found')
             return await recipe.remove()
         },
-        likeRecipe: async(root,{_id,doIncrement}, {Recipe}) => {
-            if(doIncrement) {
-                return await Recipe.findOneAndUpdate(
-                    {_id},
-                    {$inc:{likes:1}},
-                    {new: true}
-                )
-            }
+        likeRecipe: async(root,{recipeId,username}, {Recipe,User}) => {
+            await User.updateOne({username}, { 
+                $push: { favorites: recipeId }
+            })
             return await Recipe.findOneAndUpdate(
-                {_id},
-                {$inc:{likes:-1}},
+                {_id:recipeId},
+                {$inc:{likes:1}},
                 {new: true}
             )
-        }
+        },
     }
 }

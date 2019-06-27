@@ -8,7 +8,8 @@
     font-size: 18px;
     cursor: pointer;
 
-    &:hover{
+    &:hover,
+    &.is-liked{
 
         #{$this}__heart{
             background-color: red;

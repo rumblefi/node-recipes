@@ -57,6 +57,12 @@ export const GET_USER_RECIPES = gql`
     }
 `
 
+export const IS_RECIPE_LIKED = gql`
+    query($recipeId: ID!, $username: String!) {
+        isRecipeLiked(recipeId:$recipeId, username: $username)
+    }
+`
+
 export const SIGNUP_USER = gql`
     mutation($username: String!, $email: String!, $password: String!) {
         signupUser(username:$username,email: $email, password: $password){
@@ -110,8 +116,8 @@ export const DELETE_RECIPE = gql`
 `
 
 export const LIKE_RECIPE = gql`
-    mutation($_id: ID!, $doIncrement: Boolean!) {
-        likeRecipe(_id: $_id,doIncrement: $doIncrement) {
+    mutation($recipeId: ID!,$username: String!) {
+        likeRecipe(recipeId: $recipeId, username: $username) {
             likes
         }
     }
