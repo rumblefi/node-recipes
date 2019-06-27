@@ -11,6 +11,7 @@ export const GET_ALL_RECIPES = gql`
             imageURL
             createdAt
             updatedAt
+            likes
         }
     }
 `
@@ -118,6 +119,7 @@ export const DELETE_RECIPE = gql`
 export const LIKE_RECIPE = gql`
     mutation($recipeId: ID!,$username: String!, $doIncrement: Boolean!) {
         likeRecipe(recipeId: $recipeId, username: $username, doIncrement: $doIncrement) {
+            _id
             likes
         }
     }

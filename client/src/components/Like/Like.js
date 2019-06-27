@@ -1,7 +1,7 @@
 import React from 'react'
 import './Like.scss'
 import {Query,Mutation} from 'react-apollo'
-import {LIKE_RECIPE,IS_RECIPE_LIKED} from '../../queries/index'
+import {LIKE_RECIPE,IS_RECIPE_LIKED,GET_RECIPE, GET_ALL_RECIPES} from '../../queries/index'
 
 const LikeUnAuth = ({count}) => {
     return(
@@ -38,13 +38,30 @@ class Like extends React.Component{
     }
 
     handleLikeRecipe = async(likeRecipe) => {
+        await this.setState(prevState => ({
+            isRecipeLiked: !prevState.isRecipeLiked
+        }));
         await likeRecipe()
         try {
-            console.log('Yeah')
+            console.log('Recipe liked successfully')
         } catch (error) {
             console.error(error)
         }
     }
+
+    refetchQueries = () => {
+        return [
+            {
+                query: GET_RECIPE,
+                variables: {_id:this.props.recipe._id}
+            },
+            {
+                query: IS_RECIPE_LIKED,
+                variables: {recipeId:this.props.recipe._id,username:this.props.session.getCurrentUser.username}
+            }
+        ]
+    }
+    
 
     render() {
 
@@ -54,7 +71,11 @@ class Like extends React.Component{
 
         return(
 
-            <Mutation mutation={LIKE_RECIPE} variables={{recipeId:recipe._id,username,doIncrement:!isRecipeLiked}} >
+            <Mutation 
+                mutation={LIKE_RECIPE} 
+                variables={{recipeId:recipe._id,username,doIncrement:isRecipeLiked}} 
+                refetchQueries={this.refetchQueries}
+            >
 
                 {(likeRecipe,{data,loading,error}) => {
 
