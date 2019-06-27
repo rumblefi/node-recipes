@@ -28,8 +28,9 @@ const RecipePageLayout = ({recipe,session}) => {
                 </div>
             </div>
             <div className="recipe-page-panel">
-                <Like recipe={recipe} session={session} />
+                {/* <Like recipe={recipe} session={session} /> */}
                 <TestLikeRecipe _id={recipe._id} />
+                <div>Likes {recipe.likes}</div>
                 <div className="recipe-page-panel__right" >
                     <ul className="recipe-page-panel__list" >
                         <li>

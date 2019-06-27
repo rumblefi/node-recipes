@@ -124,3 +124,12 @@ export const LIKE_RECIPE = gql`
         }
     }
 `
+
+export const TEST_LIKE_RECIPE = gql`
+    mutation($_id: ID!, $username: String!) {
+        testLikeRecipe(_id: $_id, username: $username){
+            _id
+            likes
+        }
+    }
+` 

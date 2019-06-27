@@ -105,7 +105,9 @@ exports.resolvers = {
             )
         },
         testLikeRecipe: async(root,{_id,username},{Recipe,User}) => {
-            const recipe = Recipe.findOneAndUpdate({_id},{$inc: {likes: 1}})
+            const recipe = await Recipe.findOneAndUpdate({_id},{$inc: {likes: 1}})
+            await User.findOneAndUpdate({username}, {$addToSet: {favorites: _id}})
+            return recipe
         }
     }
 }
